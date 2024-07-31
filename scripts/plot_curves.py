@@ -164,8 +164,10 @@ def plot_phage_vs_lysis_od():
         ax = plt.subplot2grid((1, len(utils.antibiotic_labels)), (0, a_idx))
 
         labels_to_plot = [s for s in lysis_dict.keys() if (a in s)]
+        #labels_to_plot = [s for s in lysis_dict.keys() if (a in s) and ('r1' in s)]
 
-        lysis_od = numpy.asarray([max(data_dict[l][ data_dict['hours'] <= lysis_dict[l] ]) for l in labels_to_plot])
+        #lysis_od = numpy.asarray([max(data_dict[l][data_dict['hours'] <= lysis_dict[l] ])   for l in labels_to_plot])
+        lysis_od = numpy.asarray([max(data_dict[l][data_dict['hours'] <= lysis_dict[l] ]) - data_dict[l][0]  for l in labels_to_plot])
 
         phage_conc = [10**int(s[1]) for s in labels_to_plot]
 
@@ -189,7 +191,7 @@ def plot_phage_vs_lysis_od():
         ax.plot(10**x_log10_range, y_log10_fit_range, c='k', lw=2.5, linestyle='--', zorder=2, label="OLS regression slope")
         #ax_plot.plot(10**x_log10_range, y_log10_null_range, c='k', lw=2.5, linestyl
         
-        print(a, slope, intercept)
+        print(a, slope, std_err)
         ax.text(0.7, 0.8, 'Slope = %0.3f' % slope, fontsize=10, ha='center', va='center', transform=ax.transAxes)
         ax.text(0.7, 0.7, 'Intercept = %0.3f' % intercept, fontsize=10, ha='center', va='center', transform=ax.transAxes)
 
@@ -206,7 +208,7 @@ def plot_phage_vs_lysis_od():
         ax.set_title(label_a, fontsize=12)
         ax.set_xlabel('Initial phage concentration (PFU/mL)', fontsize=10)
         ax.set_ylabel('Biomass at lysis (OD600)', fontsize=12)
-        ax.set_ylim((0.1, 1.1))
+        #ax.set_ylim((0.1, 1.1))
 
 
 
