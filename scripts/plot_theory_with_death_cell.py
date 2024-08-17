@@ -119,19 +119,6 @@ def solve_n_cell_max(n_cell_0, n_phage_0, phi_r_0, phi_p):
 
 
 
-# requirements for cell growth
-# phi_r_max < phi_p + phi_r_0  
-
-
-phi_r_0 = 0.2
-phi_p = 0.1
-
-
-if (phi_r_max <= phi_r_0 + phi_p):
-    sys.exit('Cell growth not possible!')
-
-
-solve_n_cell_max(1e2, 1e5, 0.2, 0.3)
 
 
 # 

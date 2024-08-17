@@ -1,6 +1,10 @@
 import numpy
 import config
 
+from matplotlib import colors
+from matplotlib import cm
+import matplotlib as mpl
+
 well_labels = []
 for letter in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']:
     for number in range(1,13):
@@ -16,10 +20,24 @@ for a_idx, a in enumerate(antibiotic_labels):
 
 phage_labels = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7']
 #phage_labels = phage_labels[::-1]
-phage_dilution = numpy.asarray([10**(-1*int(s[1])) for s in phage_labels])
+phage_dilution = numpy.asarray([10**(-1*(int(s[1]) -2) ) for s in phage_labels])
 phage_labels_dict = {}
 for a_idx, a in enumerate(phage_labels):
     phage_labels_dict[a] = phage_dilution[a_idx]
+
+
+
+
+
+# taxonomic hierarchy colors
+cmap_offset = int(0.2*16)
+# +cmap_offset
+rgb_red_antibiotic = cm.Reds(numpy.linspace(0,1,len(antibiotic_labels)+5))
+rgb_red_antibiotic = mpl.colors.ListedColormap(rgb_red_antibiotic[cmap_offset:,:-1])
+
+
+
+ 
 
 
 
